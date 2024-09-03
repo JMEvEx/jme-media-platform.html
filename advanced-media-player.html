@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Media Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #media-player {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        #playlist {
+            list-style-type: none;
+            padding: 0;
+        }
+        #playlist li {
+            cursor: pointer;
+            padding: 10px;
+            background-color: #f0f0f0;
+            margin-bottom: 5px;
+        }
+        #playlist li:hover {
+            background-color: #e0e0e0;
+        }
+        #donation-button {
+            display: block;
+            width: 200px;
+            height: 40px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Media Channel</h1>
+    
+    <div id="media-container">
+        <video id="media-player" controls>
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    
+    <h2>Playlist</h2>
+    <ul id="playlist">
+        <!-- Playlist items will be added here dynamically -->
+    </ul>
+    
+    <a href="#" id="donation-button">Donate / Support</a>
+
+    <script>
+        const mediaPlayer = document.getElementById('media-player');
+        const playlist = document.getElementById('playlist');
+        
+        // Sample playlist data
+        const mediaList = [
+            { type: 'audio', src: 'path/to/audio1.mp3', title: 'Audio Track 1' },
+            { type: 'video', src: 'path/to/video1.mp4', title: 'Video 1' },
+            { type: 'audio', src: 'path/to/audio2.mp3', title: 'Audio Track 2' },
+            { type: 'video', src: 'path/to/video2.mp4', title: 'Video 2' },
+        ];
+        
+        // Populate playlist
+        mediaList.forEach((item, index) => {
+            const li = document.createElement('li');
+            li.textContent = item.title;
+            li.onclick = () => playMedia(index);
+            playlist.appendChild(li);
+        });
+        
+        function playMedia(index) {
+            const item = mediaList[index];
+            mediaPlayer.src = item.src;
+            mediaPlayer.load();
+            mediaPlayer.play();
+        }
+        
+        // Donation button click handler
+        document.getElementById('donation-button').onclick = function(e) {
+            e.preventDefault();
+            // Replace this with your actual donation/payment processing logic
+            alert('Thank you for your support! Redirecting to payment page...');
+        };
+    </script>
+</body>
+</html>

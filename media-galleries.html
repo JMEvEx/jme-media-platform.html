@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JME Media Galleries</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .gallery-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+        }
+        .gallery-item img {
+            max-width: 100%;
+            height: auto;
+        }
+        h2 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>JME Media Galleries</h1>
+
+    <h2>Music Gallery</h2>
+    <div class="gallery" id="music-gallery">
+        <!-- Music items will be added here dynamically -->
+    </div>
+
+    <h2>Audiobook Gallery</h2>
+    <div class="gallery" id="audiobook-gallery">
+        <!-- Audiobook items will be added here dynamically -->
+    </div>
+
+    <h2>Video Gallery</h2>
+    <div class="gallery" id="video-gallery">
+        <!-- Video items will be added here dynamically -->
+    </div>
+
+    <script>
+        function createGalleryItem(item) {
+            return `
+                <div class="gallery-item">
+                    <img src="${item.image}" alt="${item.title}">
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    <button onclick="playMedia('${item.src}')">Play</button>
+                </div>
+            `;
+        }
+
+        function populateGallery(galleryId, items) {
+            const gallery = document.getElementById(galleryId);
+            items.forEach(item => {
+                gallery.innerHTML += createGalleryItem(item);
+            });
+        }
+
+        function playMedia(src) {
+            // Here you would implement the logic to play the media
+            console.log(`Playing: ${src}`);
+            // For example, you could update your main player's source and play it
+            // document.getElementById('media-player').src = src;
+            // document.getElementById('media-player').play();
+        }
+
+        // Sample data - replace with your actual content
+        const musicItems = [
+            {title: "Song 1", description: "Artist - Album", image: "path/to/cover1.jpg", src: "path/to/song1.mp3"},
+            {title: "Song 2", description: "Artist - Album", image: "path/to/cover2.jpg", src: "path/to/song2.mp3"},
+            // Add more items as needed
+        ];
+
+        const audiobookItems = [
+            {title: "Audiobook 1", description: "Author - Narrator", image: "path/to/book1.jpg", src: "path/to/audiobook1.mp3"},
+            {title: "Audiobook 2", description: "Author - Narrator", image: "path/to/book2.jpg", src: "path/to/audiobook2.mp3"},
+            // Add more items as needed
+        ];
+
+        const videoItems = [
+            {title: "Video 1", description: "Description of video", image: "path/to/thumbnail1.jpg", src: "path/to/video1.mp4"},
+            {title: "Video 2", description: "Description of video", image: "path/to/thumbnail2.jpg", src: "path/to/video2.mp4"},
+            // Add more items as needed
+        ];
+
+        // Populate galleries
+        populateGallery('music-gallery', musicItems);
+        populateGallery('audiobook-gallery', audiobookItems);
+        populateGallery('video-gallery', videoItems);
+    </script>
+</body>
+</html>
